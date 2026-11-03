@@ -2,20 +2,9 @@
 
 HomeSnap removes the delay when you swipe home with a third-party launcher on ColorOS 17.
 
-With a launcher like Nova, going home on ColorOS is slow. The app shrinks away, you look at your wallpaper for more than half a second, then your icons appear all at once. Anything you tap during that wait is ignored. With HomeSnap your home screen appears much sooner, and you can tap an icon straight away.
+ColorOS keeps a launcher like Nova hidden until its own animations finish. The app shrinks away, only your wallpaper is left on screen, then your icons appear all at once. Taps during that wait are ignored. HomeSnap ends the wait early.
 
-You keep Android's own gesture navigation, including predictive back. HomeSnap needs no root, no gesture app and no change to your navigation mode. It does need [Shizuku](https://shizuku.rikka.app/).
-
-## How much faster
-
-Time from the first visible movement to the finished home screen, from 120 fps screen recordings of scripted swipes. The test phone was an Oppo Find N6 with Nova Launcher and its animation scales at 0.5x.
-
-| Swipe | Without HomeSnap | With HomeSnap |
-|---|---|---|
-| Normal (180 ms) | 830-850 ms | 208-225 ms |
-| Fast flick (40 ms) | not measured | 74-100 ms |
-
-The recordings with HomeSnap showed no flicker or black frames when going home.
+It runs alongside the normal gesture navigation, including predictive back, and doesn't change your navigation mode. It needs [Shizuku](https://shizuku.rikka.app/) but not root.
 
 ## What you need
 
@@ -30,7 +19,7 @@ The recordings with HomeSnap showed no flicker or black frames when going home.
 3. Open HomeSnap and turn on the switch.
 4. Allow HomeSnap when Shizuku asks. The status line should change to "On."
 
-Swipe home from any app to try it. To update, install a newer APK over the old one.
+To update, install a newer APK over the old one.
 
 ## After a reboot
 
@@ -70,7 +59,7 @@ HomeSnap uses an internal Android API in a way it wasn't designed for, so any Co
 
 The closing animation of the app you're leaving gets cut short, because your home screen appears before it would normally finish.
 
-It has been tested on one setup: an Oppo Find N6 (CPH2765) on ColorOS 17.0.0 (17.0.0.101) with Nova Launcher 8.9.6 and Shizuku 13.6.0. Other launchers should behave the same way, because the delay comes from ColorOS and HomeSnap detects your home app automatically. Owners of other OPPO, OnePlus and realme phones report the same delay, so it may help there too. If you try a different phone or launcher, please [open an issue](https://github.com/mostrowski123/homesnap/issues) saying how it went.
+It has been tested on one setup: an Oppo Find N6 (CPH2765) on ColorOS 17.0.0 (17.0.0.101) with Nova Launcher 8.9.6 and Shizuku 13.6.0. Other launchers should behave the same way, because the delay comes from ColorOS and HomeSnap detects your home app automatically. Owners of other OPPO, OnePlus and realme phones report the same delay, but HomeSnap hasn't been tested on those phones. If you use it on a different phone or launcher, please [open an issue](https://github.com/mostrowski123/homesnap/issues) saying how it went.
 
 Picture-in-picture, split screen, long-term use and battery life haven't been tested.
 
@@ -103,6 +92,17 @@ The helper watches for the Recents screen coming to the front, followed directly
 3. ColorOS then moves Recents on top, so the helper moves your launcher back above it and clears the translucent flag.
 
 The 60 ms delay is there for quick switch, which brings the home screen forward for up to about 30 ms before the app you're switching to.
+
+## Timings
+
+Time from the first visible movement to the finished home screen. Each range covers five scripted swipes out of the Settings app, timed from 120 fps screen recordings on an Oppo Find N6 with Nova Launcher and animation scales at 0.5x.
+
+| Swipe | HomeSnap off | HomeSnap on |
+|---|---|---|
+| Normal (180 ms) | 826-835 ms | 201-209 ms |
+| Fast flick (40 ms) | 725-742 ms | 92-109 ms |
+
+The recordings with HomeSnap on had no black frames or flicker.
 
 ## Building
 
