@@ -1,0 +1,50 @@
+name: Build and release
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+      - "LICENSE"
+  pull_request:
+
+permissions:
+  contents: write # To publish releases.
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
+
+      - name: Run tests
+        run: ./gradlew testDebugUnitTest
+
+      - name: Build for a pull request
+        if: github.event_name == 'pull_request'
+        run: ./gradlew assembleDebug
+
+      - name: Build signed release
+        if: github.event_name == 'push'
+        env:
+          HOMESNAP_KEYSTORE_BASE64: ${{ secrets.HOMESNAP_KEYSTORE_BASE64 }}
+          HOMESNAP_KEYSTORE_PASSWORD: ${{ secrets.HOMESNAP_KEYSTORE_PASSWORD }}
+        run: |
+          export HOMESNAP_KEYSTORE_PATH="$RUNNER_TEMP/release.jks"
+          echo "$HOMESNAP_KEYSTORE_BASE64" | base64 --decode > "$HOMESNAP_KEYSTORE_PATH"
+          ./gradlew assembleRelease
+
+      - name: Publish release
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="0.$GITHUB_RUN_NUMBER"
+          cp app/build/outputs/apk/release/app-release.apk "HomeSnap-$version.apk"
+          gh release create "v$version" "HomeSnap-$version.apk" --target "$GITHUB_SHA" --generate-notes
