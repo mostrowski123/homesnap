@@ -12,9 +12,9 @@ Time from the first visible movement to the finished home screen, from 120 fps s
 
 | Swipe | Screen | Without HomeSnap | With HomeSnap |
 |---|---|---|---|
-| Normal (180 ms) | Cover | 830-850 ms | 208-224 ms |
+| Normal (180 ms) | Cover | 830-850 ms | 208-225 ms |
 | Normal (180 ms) | Inner | 809-841 ms | 209-218 ms |
-| Fast flick (40 ms) | Cover | not measured | 74-91 ms |
+| Fast flick (40 ms) | Cover | not measured | 74-100 ms |
 | Fast flick (40 ms) | Inner | 744-752 ms | 107-108 ms |
 
 The recordings with HomeSnap showed no flicker or black frames when going home. The inner screen figures come from the same helper run over ADB, before it was packaged as an app.
@@ -92,7 +92,7 @@ Releases are signed with a certificate with this SHA-256 fingerprint:
 
 ## Turning it off or removing it
 
-Turn the switch off and the helper stops right away, and going home works the way ColorOS normally does. Turn the switch off before you uninstall.
+Turn the switch off and the helper stops right away, and going home works the way ColorOS normally does. Turn the switch off before you uninstall, because uninstalling with it on leaves the helper running. If you already did that, it should stop when you reboot.
 
 ## How it works
 
