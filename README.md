@@ -10,14 +10,12 @@ You keep Android's own gesture navigation, including predictive back. HomeSnap n
 
 Time from the first visible movement to the finished home screen, from 120 fps screen recordings of scripted swipes. The test phone was an Oppo Find N6 with Nova Launcher and its animation scales at 0.5x.
 
-| Swipe | Screen | Without HomeSnap | With HomeSnap |
-|---|---|---|---|
-| Normal (180 ms) | Cover | 830-850 ms | 208-225 ms |
-| Normal (180 ms) | Inner | 809-841 ms | 209-218 ms |
-| Fast flick (40 ms) | Cover | not measured | 74-100 ms |
-| Fast flick (40 ms) | Inner | 744-752 ms | 107-108 ms |
+| Swipe | Without HomeSnap | With HomeSnap |
+|---|---|---|
+| Normal (180 ms) | 830-850 ms | 208-225 ms |
+| Fast flick (40 ms) | not measured | 74-100 ms |
 
-The recordings with HomeSnap showed no flicker or black frames when going home. The inner screen figures come from the same helper run over ADB, before it was packaged as an app.
+The recordings with HomeSnap showed no flicker or black frames when going home.
 
 ## What you need
 
